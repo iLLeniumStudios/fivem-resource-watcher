@@ -17,6 +17,10 @@ inputs:
     description: "Password that you have set for rcon"
     required: true
     default: ""
+  resourcesFolder:
+    description: "Resources folder"
+    required: false
+    default: "resources"
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -25,3 +29,4 @@ runs:
     - ${{ inputs.serverIP }}
     - ${{ inputs.serverPort }}
     - ${{ inputs.rconPassword }}
+    - ${{ inputs.resourcesFolder }}
