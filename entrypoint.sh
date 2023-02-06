@@ -2,6 +2,17 @@
 
 beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
 
+resource_exists() {
+  local element="$1"
+  local array_str="$2"
+  for i in $array_str; do
+    if [ "$i" = "$element" ]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 RESTART_INDIVIDUAL_RESOURCES=$1
 
 if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ] ; then
@@ -35,13 +46,18 @@ else
     echo "Diff between ${GITHUB_EVENT_BEFORE} and ${GITHUB_SHA}"
 fi
 
+resources_to_restart=
+
 echo "${DIFF}" | while read -r changed; do
     STATUS=${changed:0:1}
     changed=${changed#??}
-    echo $STATUS
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
-        echo ${changed##*] }
-        echo "In the resources folder"
+        filtered=${changed##*]/} # Remove subfolders
+        filtered=${filtered%%/*} # Remove filename and get the folder which corresponds to the resource name
+        if ! resource_exists "$filtered" "$resources_to_restart"; then
+            echo "Adding $filtered to resources that need to restart"
+            resources_to_restart="$resources_to_restart $filtered"
+        fi
     else
         echo "No in resources"
     fi
