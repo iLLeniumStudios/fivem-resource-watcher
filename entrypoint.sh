@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
+
 RESTART_INDIVIDUAL_RESOURCES=$1
 
 if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ] ; then
@@ -34,9 +36,8 @@ else
 fi
 
 echo "${DIFF}" | while read -r changed; do
-    echo $changed;
-    if  [[ ${changed} == ${RESOURCES_FOLDER}* ]] ;
-    then
+    echo $changed
+    if beginswith ${RESOURCES_FOLDER} "${changed}"; then
         echo "In the resources folder"
     else
         echo "No in resources"
