@@ -33,7 +33,7 @@ else
     echo "Diff between ${GITHUB_EVENT_BEFORE} and ${GITHUB_SHA}"
 fi
 
-IFS=$'\n' read -rd '' -a y <<<"$DIFF"
-echo "${DIFF}"
-
-echo $y
+echo "${DIFF}" | while read -r changed; do
+    echo $changed;
+    echo "New line"
+done
