@@ -13,6 +13,28 @@ exists_in_array() {
     return 1
 }
 
+exists_in_array() {
+  local element="$1"
+  local array_str="$2"
+  for i in $array_str; do
+    if [ "$i" = "$element" ]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+append_if_not_exists() {
+  local element="$1"
+  local array_str="$2"
+  if exists_in_array "$element" "$array_str"; then
+    echo "$array_str"
+  else
+    echo "$array_str $element"
+  fi
+}
+
+
 is_array_empty() {
     local array_str="$1"
     [ -z "$array_str" ]
@@ -53,12 +75,11 @@ echo "${DIFF}" | while read -r changed; do
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
         filtered=${changed##*]/} # Remove subfolders
         filtered=${filtered%%/*} # Remove filename and get the folder which corresponds to the resource name
-        if ! exists_in_array "$filtered" "$resources_to_restart"; then
-            echo "Adding $filtered to resources that need to restart"
-            resources_to_restart="$resources_to_restart $filtered"
-        fi
+        resources_to_restart="$(append_if_not_exists "$filtered" "$resources_to_restart")"
     fi
 done
+
+echo $resources_to_restart
 
 if ! is_array_empty "$resources_to_restart"; then
     echo "Array is not empty."
