@@ -4,9 +4,7 @@ echo "$1"
 echo "$2"
 echo "$3"
 echo "$4"
-
-printenv
-${GITHUB_SHA}
+echo "$5"
 
 if [ ${GITHUB_BASE_REF} ]; then
     # Pull Request
@@ -17,6 +15,7 @@ else
     # Push
     git fetch origin ${GITHUB_EVENT_BEFORE} --depth=1
     export DIFF=$( git diff --name-only ${GITHUB_EVENT_BEFORE} ${GITHUB_SHA} )
+    echo $DIFF
     echo "Diff between ${GITHUB_EVENT_BEFORE} and ${GITHUB_SHA}"
 fi
 
