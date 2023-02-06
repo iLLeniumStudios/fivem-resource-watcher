@@ -36,7 +36,9 @@ else
 fi
 
 echo "${DIFF}" | while read -r changed; do
-    echo $changed
+    STATUS=${changed:0:1}
+    changed=${changed#??}
+    echo $STATUS
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
         echo "In the resources folder"
     else
