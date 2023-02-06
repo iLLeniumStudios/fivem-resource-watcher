@@ -40,6 +40,7 @@ echo "${DIFF}" | while read -r changed; do
     changed=${changed#??}
     echo $STATUS
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
+        echo ${changed##*] }
         echo "In the resources folder"
     else
         echo "No in resources"
