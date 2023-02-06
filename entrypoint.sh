@@ -34,6 +34,11 @@ else
 fi
 
 echo "${DIFF}" | while read -r changed; do
+    if  [[ ${changed} == ${RESOURCES_FOLDER}* ]] ;
     echo $changed;
-    echo "New line"
+    then
+        echo "In the resources folder"
+    else
+        echo "No in resources"
+    fi
 done
