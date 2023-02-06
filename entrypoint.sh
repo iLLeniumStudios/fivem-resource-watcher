@@ -41,17 +41,10 @@ is_array_empty() {
 }
 
 RESTART_INDIVIDUAL_RESOURCES=$1
-
 SERVER_IP=$2
 SERVER_PORT=$3
 RCON_PASSWORD=$4
 RESOURCES_FOLDER=$5
-
-echo "$1"
-echo "$2"
-echo "$3"
-echo "$4"
-echo "$5"
 
 git config --global --add safe.directory /github/workspace
 
@@ -71,9 +64,8 @@ resources_to_restart=
 
 IFS=$'\n'
 for changed in $DIFF; do
-    STATUS=${changed:0:1}
     changed=${changed#??}
-    if beginswith ${RESOURCES_FOLDER} "${changed}"; then
+    if beginswith "${RESOURCES_FOLDER}" "${changed}"; then
         filtered=${changed##*]/} # Remove subfolders
         filtered=${filtered%%/*} # Remove filename and get the folder which corresponds to the resource name
         resources_to_restart="$(append_if_not_exists "$filtered" "$resources_to_restart")"
@@ -81,20 +73,17 @@ for changed in $DIFF; do
 done
 unset IFS
 
-echo $resources_to_restart
-
 if ! is_array_empty "$resources_to_restart"; then
-    echo "Array is not empty."
     if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ]; then
         echo "Will restart individual resources"
         for resource in $resources_to_restart; do
             echo "Restarting ${resource}"
-            #rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command "ensure ${resource}"
+            rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command "ensure ${resource}"
         done
     else
         echo "Will restart the whole server"
-        #rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command 'quit "Restarting server"'
+        rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command 'quit "Restarting server"'
     fi
 else
-    echo "Array is empty."
+    echo "Nothing to restart"
 fi
