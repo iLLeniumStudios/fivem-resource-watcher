@@ -5,6 +5,7 @@ inputs:
     description: "Restart resources individually or restart the whole server"
     required: false
     default: true
+    type: boolean
   serverIP:
     description: "IP of the FiveM server"
     required: true
