@@ -78,11 +78,11 @@ if ! is_array_empty "$resources_to_restart"; then
         echo "Will restart individual resources"
         for resource in $resources_to_restart; do
             echo "Restarting ${resource}"
-            rcon -a "${SERVER_IP}:${SERVER_PORT}" -p "${RCON_PASSWORD}" command "ensure ${resource}"
+            icecon --command "ensure ${resource}" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
         done
     else
         echo "Will restart the whole server"
-        rcon -a "${SERVER_IP}:${SERVER_PORT}" -p "${RCON_PASSWORD}" command 'txaEvent "serverShuttingDown" "{＂delay＂:5000,＂author＂:Server Owner,＂message＂:＂Server restarting.＂}"'
+        icecon --command 'txaEvent "serverShuttingDown" "{＂delay＂:5000,＂author＂:Server Owner,＂message＂:＂Server restarting.＂}"' "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
     fi
 else
     echo "Nothing to restart"
