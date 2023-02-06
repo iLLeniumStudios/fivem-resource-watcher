@@ -2,7 +2,7 @@
 
 beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
 
-resource_exists() {
+exists_in_array() {
   local element="$1"
   local array_str="$2"
   for i in $array_str; do
@@ -13,13 +13,12 @@ resource_exists() {
   return 1
 }
 
-RESTART_INDIVIDUAL_RESOURCES=$1
+is_array_empty() {
+  local array_str="$1"
+  [ -z "$array_str" ]
+}
 
-if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ] ; then
-    echo "Will restart individual resources"
-else
-    echo "Will restart the whole server"
-fi
+RESTART_INDIVIDUAL_RESOURCES=$1
 
 SERVER_IP=$2
 SERVER_PORT=$3
@@ -54,11 +53,22 @@ echo "${DIFF}" | while read -r changed; do
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
         filtered=${changed##*]/} # Remove subfolders
         filtered=${filtered%%/*} # Remove filename and get the folder which corresponds to the resource name
-        if ! resource_exists "$filtered" "$resources_to_restart"; then
+        if ! exists_in_array "$filtered" "$resources_to_restart"; then
             echo "Adding $filtered to resources that need to restart"
             resources_to_restart="$resources_to_restart $filtered"
         fi
-    else
-        echo "No in resources"
     fi
 done
+
+if ! is_array_empty "$resources_to_restart"; then
+    if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ] ; then
+        echo "Will restart individual resources"
+        for resource in $resources_to_restart; do
+            echo "Restarting ${resource}"
+            #rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command "ensure ${resource}"
+        done
+    else
+        echo "Will restart the whole server"
+       #rcon -a ${SERVER_IP}:${SERVER_PORT} -p ${RCON_PASSWORD} command 'quit "Restarting server"'
+    fi
+fi
