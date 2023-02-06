@@ -1,7 +1,7 @@
 # Container image that runs your code
 FROM alpine:3.17
 
-RUN apk add --no-cache curl tar
+RUN apk add --no-cache curl tar git
 
 ARG RCON_VERSION="0.10.2"
 
