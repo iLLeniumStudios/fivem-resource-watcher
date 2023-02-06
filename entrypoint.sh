@@ -78,10 +78,6 @@ if ! is_array_empty "$resources_to_restart"; then
         echo "Will restart individual resources"
         for resource in $resources_to_restart; do
             echo "Restarting ${resource}"
-            echo "ensure ${resource} ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}"
-            which icecon
-            icecon --help
-            icecon
             icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
         done
     else
