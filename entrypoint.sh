@@ -33,4 +33,7 @@ else
     echo "Diff between ${GITHUB_EVENT_BEFORE} and ${GITHUB_SHA}"
 fi
 
+readarray -t y <<<"$DIFF"
 echo "${DIFF}"
+
+echo $y
