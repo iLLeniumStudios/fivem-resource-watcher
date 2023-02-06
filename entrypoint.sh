@@ -82,7 +82,7 @@ if ! is_array_empty "$resources_to_restart"; then
         done
     else
         echo "Will restart the whole server"
-        icecon --command 'txaEvent "serverShuttingDown" "{＂delay＂:5000,＂author＂:Server Owner,＂message＂:＂Server restarting.＂}"' "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
+        icecon --command "quit" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
     fi
 else
     echo "Nothing to restart"
