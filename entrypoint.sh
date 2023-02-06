@@ -69,7 +69,8 @@ fi
 
 resources_to_restart=
 
-echo "${DIFF}" | while read -r changed; do
+IFS=$'\n'
+for changed in $DIFF; do
     STATUS=${changed:0:1}
     changed=${changed#??}
     if beginswith ${RESOURCES_FOLDER} "${changed}"; then
@@ -78,6 +79,7 @@ echo "${DIFF}" | while read -r changed; do
         resources_to_restart="$(append_if_not_exists "$filtered" "$resources_to_restart")"
     fi
 done
+unset IFS
 
 echo $resources_to_restart
 
