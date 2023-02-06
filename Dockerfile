@@ -14,7 +14,8 @@ RUN apk add --no-cache curl tar git
 ARG ICECON_VERSION="v1.0.0"
 
 RUN curl -LO https://github.com/icedream/icecon/releases/download/${ICECON_VERSION}/icecon_linux_amd64 && \
-    mv icecon_linux_amd64 /usr/local/bin/icecon
+    mv icecon_linux_amd64 /usr/local/bin/icecon && \
+    chmod +x /usr/local/bin/icecon
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
