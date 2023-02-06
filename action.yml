@@ -1,0 +1,27 @@
+name: "FiveM Resource Watcher"
+description: "Watches for changed resources and restarts them"
+inputs:
+  restartIndividualResources:
+    description: "Restart resources individually or restart the whole server"
+    required: false
+    default: true
+  serverIP:
+    description: "IP of the FiveM server"
+    required: true
+    default: ""
+  serverPort:
+    description: "Port of the FiveM server"
+    required: false
+    default: 30120
+  rconPassword:
+    description: "Password that you have set for rcon"
+    required: true
+    default: ""
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.restartIndividualResources }}
+    - ${{ inputs.serverIP }}
+    - ${{ inputs.serverPort }}
+    - ${{ inputs.rconPassword }}
