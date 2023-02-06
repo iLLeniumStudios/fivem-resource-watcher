@@ -6,6 +6,8 @@ echo "$3"
 echo "$4"
 echo "$5"
 
+git config --global --add safe.directory /github/workspace
+
 if [ ${GITHUB_BASE_REF} ]; then
     # Pull Request
     git fetch origin ${GITHUB_BASE_REF} --depth=1
