@@ -29,13 +29,13 @@ if [ ${GITHUB_BASE_REF} ]; then
 else
     # Push
     git fetch origin ${GITHUB_EVENT_BEFORE} --depth=1
-    export DIFF=$( git diff --name-only ${GITHUB_EVENT_BEFORE} ${GITHUB_SHA} )
+    export DIFF=$( git diff --name-status ${GITHUB_EVENT_BEFORE} ${GITHUB_SHA} )
     echo "Diff between ${GITHUB_EVENT_BEFORE} and ${GITHUB_SHA}"
 fi
 
 echo "${DIFF}" | while read -r changed; do
-    if  [[ ${changed} == ${RESOURCES_FOLDER}* ]] ;
     echo $changed;
+    if  [[ ${changed} == ${RESOURCES_FOLDER}* ]] ;
     then
         echo "In the resources folder"
     else
