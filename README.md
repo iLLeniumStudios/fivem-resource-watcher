@@ -150,6 +150,7 @@ jobs:
 There's a couple of things that you need to change before pushing this file:
 
 1. On `Line 17` of the file, you need to set the folder path where you have cloned your repository on your remote VPS / Dedicated server. For example, if you are on Windows, it can be something like `C:/FiveM/MyRPServerResources`, or on Linux, it can be like `/home/username/FiveM/MyRPServerResources`.
+2. On `Line 20`, set the username that you use for logging into your VPS / Dedicated Server via RDP
 2. Comment out `Line 22` and uncomment `Line 21` if you're using an SSH key instead of a password for logging in.
 3. On `Line 23`, set your SSH port if you have changed it explicitly. No need to do anything if you are using defaults.
 4. Set your FiveM server port on `Line 32` if it is other than 30120
