@@ -10,6 +10,8 @@ fivem-resource-watcher GitHub Action allows you to restart resources automatical
 - Resource filters (Coming Soon)
 - Works both on Linux and Windows
 
+Video Tutorial / Showcase: https://youtu.be/I_FqjKvcjxY
+
 ## Benefits
 This allows you, as a server owner to have a Git Managed workflow for your server where you don't need to provide access to the VPS / Dedicated server or txAdmin console to your developers. They just push the changes to the git repository and they all get pulled and deployed automatically
 
