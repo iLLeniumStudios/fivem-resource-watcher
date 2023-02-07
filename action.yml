@@ -22,6 +22,17 @@ inputs:
     description: "Resources folder name"
     required: false
     default: "resources"
+  restartServerWhen0Players:
+    description: "Restart the server instead when there are no players on the server"
+    required: false
+    default: false
+    type: boolean
+  ignoreResources:
+    description: "List of resources that you want to ignore separated by spaces and not restart when changes are made to them"
+    required: false
+    default: ""
+    type: string
+
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -31,3 +42,5 @@ runs:
     - ${{ inputs.serverPort }}
     - ${{ inputs.rconPassword }}
     - ${{ inputs.resourcesFolder }}
+    - ${{ inputs.restartServerWhen0Players }}
+    - ${{ inputs.ignoreResources }}

@@ -3,17 +3,6 @@
 beginswith() { case $2 in "$1"*) true ;; *) false ;; esac }
 
 exists_in_array() {
-    local element="$1"
-    local array_str="$2"
-    for i in $array_str; do
-        if [ "$i" = "$element" ]; then
-            return 0
-        fi
-    done
-    return 1
-}
-
-exists_in_array() {
   local element="$1"
   local array_str="$2"
   for i in $array_str; do
@@ -45,6 +34,8 @@ SERVER_IP=$2
 SERVER_PORT=$3
 RCON_PASSWORD=$4
 RESOURCES_FOLDER=$5
+RESTART_SERVER_WHEN_0_PLAYERS=$6
+IGNORED_RESOURCES=$7
 
 git config --global --add safe.directory /github/workspace
 
@@ -77,8 +68,12 @@ if ! is_array_empty "$resources_to_restart"; then
     if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ]; then
         echo "Will restart individual resources"
         for resource in $resources_to_restart; do
-            echo "Restarting ${resource}"
-            icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
+            if exists_in_array "${resource}" "${IGNORED_RESOURCES}"; then
+                echo "Ignoring restart of the resource ${resource}"
+            else
+                echo "Restarting ${resource}"
+                icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
+            fi
         done
     else
         echo "Will restart the whole server"
