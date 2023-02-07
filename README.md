@@ -10,8 +10,6 @@ fivem-resource-watcher GitHub Action allows you to restart resources automatical
 - Resource filters (Coming Soon)
 - Works both on Linux and Windows
 
-Video Tutorial / Showcase: https://youtu.be/I_FqjKvcjxY
-
 ## Benefits
 This allows you, as a server owner to have a Git Managed workflow for your server where you don't need to provide access to the VPS / Dedicated server or txAdmin console to your developers. They just push the changes to the git repository and they all get pulled and deployed automatically
 
@@ -26,6 +24,8 @@ This allows you, as a server owner to have a Git Managed workflow for your serve
 | resourcesToIgnore | List of resources that you want to ignore separated by spaces and not restart when changes are made to them | false | |
 
 ## How to set up
+
+Video Tutorial / Showcase: https://youtu.be/I_FqjKvcjxY
 
 ### Explanation
 This action alone only does part of the automation. In order to actually make the restarts useful, we need to pull the remote changes first on the Server so that the changes are live after the restart. This doc will go through all the changes that you need to make in order to have a fully working pipeline. Your deployment workflow will look like the following after the pipeline is set up:
