@@ -95,7 +95,7 @@ Following are the secrets that you need to configure in that section:
 | SSH_HOST | IP of your server which you use to login to your server (RDP or SSH) |
 | SSH_PASSWORD  | Password for your user that you use to login to your server (RDP or SSH) (Not required when using SSH_KEY) |
 | SSH_KEY | Set this in case you are using Key based authentication. (Not required when using SSH_PASSWORD)  |
-| RCON_PASSWORD | Password that you have set in yout server.cfg using `rcon_password` |
+| RCON_PASSWORD | Password that you have set in your server.cfg using `rcon_password` |
 
 - For every secret mentioned in the table above, click on `New Repository Secret` and add it
 - The `Name` field should have exactly the name of the secret from the table, for example `SSH_HOST`.
