@@ -62,6 +62,7 @@ If you are still reading this part then then you are using Windows and you need 
 ```bash
 ssh <user>@<ip>
 ```
+
 	- Replace `<user>` with the username that you use to login to your RDP
 	- Replace `<ip>` with the IP of the VPS that you use to connect to your RDP
 	- Type in your password for the user when asked
