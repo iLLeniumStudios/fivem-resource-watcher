@@ -72,12 +72,12 @@ if ! is_array_empty "$resources_to_restart"; then
                 echo "Ignoring restart of the resource ${resource}"
             else
                 echo "Restarting ${resource}"
-                icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
+                #icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
             fi
         done
     else
         echo "Will restart the whole server"
-        icecon --command "quit" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
+        #icecon --command "quit" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
     fi
 else
     echo "Nothing to restart"
