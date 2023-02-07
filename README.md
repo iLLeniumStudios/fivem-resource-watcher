@@ -157,7 +157,7 @@ There's a couple of things that you need to change before pushing this file:
 2. Comment out `Line 22` and uncomment `Line 21` if you're using an SSH key instead of a password for logging in.
 3. On `Line 23`, set your SSH port if you have changed it explicitly. No need to do anything if you are using defaults.
 4. Set your FiveM server port on `Line 32` if it is other than 30120
-5. Change `restartIndividualResource` to `true` on `Line 34` if you want to restart the whole server after making changes. By default it is set to `false` which only restarts the individual resources that you have made changes to.
+5. Change `restartIndividualResources` to `true` on `Line 34` if you want to restart the whole server after making changes. By default it is set to `false` which only restarts the individual resources that you have made changes to.
 
 After making the above changes, save the file and push it to the repository.
 
