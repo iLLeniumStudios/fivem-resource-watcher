@@ -7,7 +7,7 @@ fivem-resource-watcher GitHub Action allows you to restart resources automatical
 - Detects change detection
 - Restart only resources that have been changed
 - Restart the whole server on changes
-- Resource filters (Coming Soon)
+- Resource filters
 - Works both on Linux and Windows
 
 ## Benefits
