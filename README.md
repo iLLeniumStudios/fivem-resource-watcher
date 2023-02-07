@@ -59,6 +59,7 @@ If you are still reading this part then then you are using Windows and you need 
 	- To do this, open terminal / powershell as administrator, type the following and press enter:
 		- `netsh advfirewall firewall add rule name="Open SSH Port 22" dir=in action=allow protocol=TCP localport=22 remoteip=any`
 - Once done, you can test it out by opening a terminal / powershell on your local PC and type the following:
+
 ```bash
 ssh <user>@<ip>
 ```
@@ -66,6 +67,7 @@ ssh <user>@<ip>
 	- Replace `<user>` with the username that you use to login to your RDP
 	- Replace `<ip>` with the IP of the VPS that you use to connect to your RDP
 	- Type in your password for the user when asked
+
 - If everything was done correctly, you should see something like this on the terminal:
 
 ```powershell
