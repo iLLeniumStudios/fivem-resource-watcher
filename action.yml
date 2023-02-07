@@ -19,7 +19,7 @@ inputs:
     required: true
     default: ""
   resourcesFolder:
-    description: "Path to resources folder"
+    description: "Resources folder name"
     required: false
     default: "resources"
 runs:
