@@ -27,7 +27,7 @@ inputs:
     required: false
     default: false
     type: boolean
-  ignoreResources:
+  resourcesToIgnore:
     description: "List of resources that you want to ignore separated by spaces and not restart when changes are made to them"
     required: false
     default: ""
@@ -43,4 +43,4 @@ runs:
     - ${{ inputs.rconPassword }}
     - ${{ inputs.resourcesFolder }}
     - ${{ inputs.restartServerWhen0Players }}
-    - ${{ inputs.ignoreResources }}
+    - ${{ inputs.resourcesToIgnore }}
