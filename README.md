@@ -105,7 +105,7 @@ Following are the secrets that you need to configure in that section:
 - The `Secret` field should have the value for the secret
 - Make sure that you have set all of the secrets correctly before proceeding, or the pipeline will not work
 
-**Note: ** `SSH_PASSWORD` and `SSH_KEY` secrets are mutually exclusive, you must either set 1 or the other. There's no need to set them both.
+**Note**: `SSH_PASSWORD` and `SSH_KEY` secrets are mutually exclusive, you must either set 1 or the other. There's no need to set them both.
 
 ### Configuring Pipeline
 
