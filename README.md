@@ -21,6 +21,7 @@ This allows you, as a server owner to have a Git Managed workflow for your serve
 | serverIP | IP of the FiveM server | true |  |
 | serverPort | Port of the FiveM server | false | 30120 |
 | resourcesFolder | Resources folder name | false | resources |
+| resourcesToIgnore | List of resources that you want to ignore separated by spaces and not restart when changes are made to them | false | |
 
 ## How to set up
 
