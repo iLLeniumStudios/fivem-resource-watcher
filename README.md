@@ -83,7 +83,7 @@ administrator@WIN-17A7N1QL3J3 C:\Users\Administrator>
 - Type `exit` to disconnect from the SSH session
 
 
-### Configuring secrets
+### Configuring secrets (VPS / Dedicated Server Only)
 
 Now that everything is configured on the FiveM server as well as VPS / Dedicated Server, we need to setup some secrets in your GitHub repository that you're using for your server resources.
 
@@ -108,7 +108,7 @@ Following are the secrets that you need to configure in that section:
 
 **Note**: `SSH_PASSWORD` and `SSH_KEY` secrets are mutually exclusive, you must either set 1 or the other. There's no need to set them both.
 
-### Configuring Pipeline
+### Configuring Pipeline (VPS / Dedicated Server only)
 
 Now that we have configured the secrets as well, all that's left is to add the pipeline to your repository and change some of the parameters.
 
