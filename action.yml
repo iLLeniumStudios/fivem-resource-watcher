@@ -23,7 +23,7 @@ inputs:
     required: false
     default: "resources"
   restartServerWhen0Players:
-    description: "Restart the server instead when there are no players on the server"
+    description: "Restart the server instead when there are no players on the server. (Takes priority over restartIndividualReesources)"
     required: false
     default: false
     type: boolean

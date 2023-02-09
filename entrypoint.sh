@@ -23,10 +23,14 @@ append_if_not_exists() {
   fi
 }
 
+icecon_command() {
+    icecon --command "$1" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
+}
 
-is_array_empty() {
-    local array_str="$1"
-    [ -z "$array_str" ]
+get_player_count() {
+    response=$(curl -s "${SERVER_IP}:${SERVER_PORT}/players.json")
+    player_count=$(echo "$response" | jq 'length')
+    echo "$player_count"
 }
 
 RESTART_INDIVIDUAL_RESOURCES=$1
@@ -64,21 +68,25 @@ for changed in $DIFF; do
 done
 unset IFS
 
-if ! is_array_empty "$resources_to_restart"; then
-    if [ "$RESTART_INDIVIDUAL_RESOURCES" = true ]; then
+if [ -z "$resources_to_restart" ]; then
+    echo "Nothing to restart"
+else
+    player_count=$(get_player_count)
+    if [ "$RESTART_SERVER_WHEN_0_PLAYERS" = true ] && [ "$player_count" -eq 0 ]; then
+        echo "Will restart the whole server due to 0 players"
+        icecon_command "quit"
+    elif [ "$RESTART_INDIVIDUAL_RESOURCES" = true ]; then
         echo "Will restart individual resources"
         for resource in $resources_to_restart; do
             if exists_in_array "${resource}" "${IGNORED_RESOURCES}"; then
                 echo "Ignoring restart of the resource ${resource}"
             else
                 echo "Restarting ${resource}"
-                icecon --command "ensure ${resource}" ${SERVER_IP}:${SERVER_PORT} ${RCON_PASSWORD}
+                icecon_command "ensure ${resource}"
             fi
         done
     else
         echo "Will restart the whole server"
-        icecon --command "quit" "${SERVER_IP}:${SERVER_PORT}" "${RCON_PASSWORD}"
+        icecon_command "quit"
     fi
-else
-    echo "Nothing to restart"
 fi

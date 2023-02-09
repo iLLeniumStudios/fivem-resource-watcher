@@ -1,7 +1,7 @@
 # Container image that runs your code
 FROM alpine:3.17
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git jq
 
 # Use icecon instead. For some reason rcon-cli doesn't send a valid command
 #ARG RCON_VERSION="0.10.2"

@@ -22,6 +22,7 @@ This allows you, as a server owner to have a Git Managed workflow for your serve
 | serverPort | Port of the FiveM server | false | 30120 |
 | resourcesFolder | Resources folder name | false | resources |
 | resourcesToIgnore | List of resources that you want to ignore separated by spaces and not restart when changes are made to them | false | |
+| restartServerWhen0Players | Restart the server instead when there are no players on the server. (Takes priority over `restartIndividualReesources`) | false | false |
 
 ## How to set up
 
