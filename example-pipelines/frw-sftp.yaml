@@ -1,0 +1,36 @@
+name: "Sync and Restart Resources"
+on:
+  push:
+    branches:
+      - main
+jobs:
+  sync-restart:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Pull remote changes"
+        uses: appleboy/ssh-action@v0.1.7
+        env:
+          REPO_PATH: "C:/ServerResources"
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: Administrator
+          #key: ${{ secrets.SSH_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd ${{ env.REPO_PATH }} && git pull
+      - name: "Restart resources / server"
+        uses: illeniumstudios/fivem-resource-watcher@main
+        env:
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+        with:
+          serverIP: ${{ secrets.SSH_HOST }}
+          serverPort: 30120
+          rconPassword: ${{ secrets.RCON_PASSWORD }}
+          restartIndividualResources: true
+          resourcesToIgnore: ""
+          restartServerWhen0Players: false
